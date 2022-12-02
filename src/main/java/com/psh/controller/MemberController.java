@@ -1,6 +1,7 @@
 package com.psh.controller;
 
 import com.psh.model.member.Member;
+import com.psh.model.member.MemberJoinParam;
 import com.psh.service.MemberService;
 import com.psh.service.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.validation.Valid;
 
 import static com.psh.utill.HttpResponses.*;
 
@@ -33,15 +36,34 @@ public class MemberController {
 	//회원가입
 	@PostMapping("/join")
 	@ResponseBody
-	public ResponseEntity<Void> joinPOST(Member member) throws Exception{
-
+	public ResponseEntity<Void> joinPOST(@Valid @ModelAttribute MemberJoinParam param) throws Exception{
 
 		/* 회원가입 쿼리 실행 */
-		memberService.memberJoin(member);
+		memberService.memberJoin(param);
 
 		return RESPONSE_OK;
 
 	}
+
+	// 아이디 중복 검사
+	@PostMapping("/memberIdChk")
+	public ResponseEntity<Void> memberIdChkPOST(String memberId) throws Exception{
+
+		log.info("memberIdChk() 진입");
+
+		int result = memberService.idCheck(memberId);
+
+		if(result != 0) {
+
+			return RESPONSE_CONFLICT;	// 중복 아이디 o
+
+		} else {
+
+			return RESPONSE_OK;	// 중복 아이디 x
+
+		}
+
+	} // memberIdChkPOST() 종료
 
 //	//로그인 페이지 이동
 //	@RequestMapping(value="/login", method = RequestMethod.GET)
@@ -51,30 +73,6 @@ public class MemberController {
 //
 //	}
 //
-//	// 아이디 중복 검사
-//	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String memberIdChkPOST(String memberId) throws Exception{
-//
-//		/* logger.info("memberIdChk() 진입"); */
-//
-//		logger.info("memberIdChk() 진입");
-//
-//		int result = memberservice.idCheck(memberId);
-//
-//		logger.info("결과값 = " + result);
-//
-//		if(result != 0) {
-//
-//			return "fail";	// 중복 아이디가 존재
-//
-//		} else {
-//
-//			return "success";	// 중복 아이디 x
-//
-//		}
-//
-//	} // memberIdChkPOST() 종료
 //
 //	/* 이메일 인증 */
 //	@RequestMapping(value="/mailCheck", method=RequestMethod.GET)

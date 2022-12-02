@@ -1,11 +1,12 @@
 package com.psh.service;
 
 import com.psh.model.member.Member;
+import com.psh.model.member.MemberJoinParam;
 
 public interface MemberService {
 
     /* 회원가입 */
-    public void memberJoin(Member member);
+    public void memberJoin(MemberJoinParam param);
 
     /* 아이디 중복 검사 */
     public int idCheck(String memberId);

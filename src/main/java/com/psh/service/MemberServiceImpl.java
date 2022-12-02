@@ -2,6 +2,7 @@ package com.psh.service;
 
 import com.psh.mapper.MemberMapper;
 import com.psh.model.member.Member;
+import com.psh.model.member.MemberJoinParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,12 +15,12 @@ public class MemberServiceImpl implements MemberService {
 	private final MemberMapper memberMapper;
 
 	@Override
-	public void memberJoin(Member member) {
+	public void memberJoin(MemberJoinParam param) {
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encryptedPassword = passwordEncoder.encode(member.getPassword());
-		member.setPassword(encryptedPassword);
-		memberMapper.memberJoin(member);
+		String encryptedPassword = passwordEncoder.encode(param.getPassword());
+		param.setPassword(encryptedPassword);
+		memberMapper.memberJoin(param);
 	}
 
 	@Override
