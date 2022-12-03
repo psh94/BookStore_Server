@@ -52,11 +52,11 @@ public class MemberServiceTests{
 
     @Test
     public void memberIdChk(){
-        String isExistId = "test";
-        String  notExistId= "aaa";
+        String existId = "test2";
+        String notExistId= "aaa";
 
-        memberService.idCheck(isExistId); // 결과값 : 1
-        memberService.idCheck(notExistId); // 결과값 : 0
+        memberService.isExistMemberId(existId); // 결과값 : true
+        memberService.isExistMemberId(notExistId); // 결과값 : false
 
     }
 

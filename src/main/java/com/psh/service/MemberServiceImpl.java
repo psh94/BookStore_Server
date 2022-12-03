@@ -1,5 +1,6 @@
 package com.psh.service;
 
+import com.psh.exception.LoginParamException;
 import com.psh.mapper.MemberMapper;
 import com.psh.model.member.Member;
 import com.psh.model.member.MemberJoinParam;
@@ -25,8 +26,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int idCheck(String memberId) {
-		return memberMapper.idCheck(memberId);
+	public boolean isExistMemberId(String memberId) {
+		return memberMapper.isExistMemberId(memberId);
+
 	}
 
 	@Override
@@ -36,6 +38,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void memberDelete(Member member) {
+		if(member.getMemberId() == null || member.getPassword() == null){
+			throw new LoginParamException("아이디 또는 비밀번호를 입력하지 않았습니다.");
+		}
 		memberMapper.memberDelete(member);
 	}
 

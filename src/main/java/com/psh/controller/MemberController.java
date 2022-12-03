@@ -55,9 +55,9 @@ public class MemberController {
 
 		log.info("memberIdChk() 진입");
 
-		int result = memberService.idCheck(memberId);
+		boolean duplicatedMemberId = memberService.isExistMemberId(memberId);
 
-		if(result != 0) {
+		if(duplicatedMemberId) {
 
 			return RESPONSE_CONFLICT;	// 중복 아이디 o
 
