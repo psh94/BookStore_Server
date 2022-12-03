@@ -26,15 +26,15 @@
 	    <!-- 인터셉터 적용 -->
     <interceptors>
         <interceptor>
-            <mapping path="/member/login.do"></mapping>
-            <beans:bean id="loginIntreceptor" class="com.psh.interceptor.LoginInterceptor"></beans:bean>
+            <mapping path="/member/login"></mapping>
+            <beans:bean id="loginInterceptor" class="com.psh.interceptor.LoginInterceptor"></beans:bean>
         </interceptor>
         <interceptor>
             <mapping path="/admin/**"></mapping>
-            <beans:bean id="AdminIntreceptor" class="com.psh.interceptor.AdminInterceptor"></beans:bean>
+            <beans:bean id="AdminInterceptor" class="com.psh.interceptor.AdminInterceptor"></beans:bean>
         </interceptor>
     </interceptors>
-    
+
     <!-- 업로드 관련 빈 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></beans:bean>	
 	
