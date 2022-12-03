@@ -29,11 +29,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member memberLogin(Member member) {
-		return memberMapper.memberLogin(member);
-	}
-
-	@Override
 	public Member getMemberInfo(String memberId) {
 		return memberMapper.getMemberInfo(memberId);
 	}

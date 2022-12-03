@@ -15,9 +15,9 @@ public class AdminInterceptor implements HandlerInterceptor  {
 		
 		HttpSession session = request.getSession();
 		
-		Member lvo = (Member)session.getAttribute("member");
+		Member loginedMember = (Member)session.getAttribute("member");
 		
-		if(lvo == null || lvo.getAdminCk() == 0) {	// 관리자 계정 아닌 경우
+		if(loginedMember == null || loginedMember.getAdminCk() == 0) {	// 관리자 계정 아닌 경우
 			
 			response.sendRedirect("/main");	// 메인페이지로 리다이렉트
 			

@@ -11,8 +11,6 @@ public interface MemberService {
     /* 아이디 중복 검사 */
     public int idCheck(String memberId);
 
-    /* 로그인 */
-    public Member memberLogin(Member member);
 
     /* 주문자 주소 정보 */
     public Member getMemberInfo(String memberId);
