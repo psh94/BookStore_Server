@@ -34,7 +34,7 @@
 	</sql>
 	
 	<!-- 상품 검색 -->
-	<select id="getGoodsList" resultType="com.psh.model.BookVO">
+	<select id="getGoodsList" resultType="com.psh.model.book.Book">
 	
 			select  bookId, bookName, b.authorName, a.authorId, c.cateName, a.cateCode, publisher, publeYear, bookPrice, bookDiscount
 			from psh_book a left outer join psh_author b on a.authorId = b.authorId
@@ -62,7 +62,7 @@
 	</select>		
 	
 	<!-- 국내 카테고리 리스트 -->
-	<select id="getCateCode1" resultType="com.psh.model.CateVO">
+	<select id="getCateCode1" resultType="com.psh.model.book.Category">
 	
 		<![CDATA[
 			select * from psh_bcate where cateCode > 100000 and cateCode < 200000
@@ -70,7 +70,7 @@
 	</select>
 	
 	<!-- 외국 카테고리 리스트 -->
-	<select id="getCateCode2" resultType="com.psh.model.CateVO">
+	<select id="getCateCode2" resultType="com.psh.model.book.Category">
 	
 		<![CDATA[
 			select * from psh_bcate where cateCode > 200000 and cateCode < 300000
@@ -143,7 +143,7 @@
 	</select>	
 	
 	<!-- 상품 정보 -->
-	<select id="getGoodsInfo" resultType="com.psh.model.BookVO">
+	<select id="getGoodsInfo" resultType="com.psh.model.book.Book">
 	
 			select a.BOOKID, a.BOOKNAME, a.AUTHORID, b.AUTHORNAME, a.PUBLEYEAR, a.PUBLISHER, a.CATECODE, c.CATENAME, a.BOOKPRICE, a.BOOKSTOCK, a.BOOKDISCOUNT, a.BOOKINTRO, a.BOOKCONTENTS
 			from psh_book a left outer join psh_author b on a.authorId = b.authorId
@@ -152,7 +152,7 @@
 	
 	</select>	
 	
-	<select id="getBookIdName" resultType="com.psh.model.BookVO">
+	<select id="getBookIdName" resultType="com.psh.model.book.Book">
 	
 		select bookId, bookName from psh_book
 		where bookId = #{bookId}

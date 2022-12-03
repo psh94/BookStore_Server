@@ -19,6 +19,14 @@
   	<select id="memberLogin" resultType="com.psh.model.member.Member">
   		select memberId, password, name, adminck, money, point from book_member where memberId = #{memberId} and password = #{password}
   	</select>
+
+	<update id="memberUpdate" parameterType="com.psh.model.member.Member">
+		update book_member set password = #{password}, email = #{email}, address =#{address} where memberId = #{memberId}
+	</update>
+
+	<delete id="memberDelete" parameterType="com.psh.model.member.Member">
+		delete from book_member where memberId = #{memberId} and password = #{password}
+	</delete>
   	
     	<!-- 주문자 정보 -->
   	<select id="getMemberInfo" resultType="com.psh.model.member.Member">

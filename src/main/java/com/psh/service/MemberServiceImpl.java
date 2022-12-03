@@ -3,6 +3,7 @@ package com.psh.service;
 import com.psh.mapper.MemberMapper;
 import com.psh.model.member.Member;
 import com.psh.model.member.MemberJoinParam;
+import com.psh.model.member.MemberUpdateParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +27,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int idCheck(String memberId) {
 		return memberMapper.idCheck(memberId);
+	}
+
+	@Override
+	public void memberUpdate(MemberUpdateParam param) {
+		memberMapper.memberUpdate(param);
+	}
+
+	@Override
+	public void memberDelete(Member member) {
+		memberMapper.memberDelete(member);
 	}
 
 	@Override
