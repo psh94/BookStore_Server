@@ -3,6 +3,7 @@ package com.psh.controller;
 import com.psh.model.member.Member;
 import com.psh.model.member.MemberJoinParam;
 import com.psh.model.member.MemberLoginParam;
+import com.psh.model.member.MemberUpdateParam;
 import com.psh.service.LoginService;
 import com.psh.service.MemberService;
 import com.psh.utill.SessionConst;
@@ -29,29 +30,21 @@ public class MemberController {
 
 	private final LoginService loginService;
 
-
-	//회원가입 페이지 이동
-	@GetMapping("/join")
-	public void loginGET() {
-
-		log.info("회원가입 페이지 진입");
-
-	}
-
 	//회원가입
 	@PostMapping("/join")
-	public ResponseEntity<Void> joinPOST(@Valid @ModelAttribute MemberJoinParam param) throws Exception{
+	public ResponseEntity<Void> join(@Valid @ModelAttribute MemberJoinParam param, BindingResult bindingResult) throws Exception{
 
-		/* 회원가입 쿼리 실행 */
+		if(bindingResult.hasErrors()){
+			return RESPONSE_CONFLICT;
+		}
 		memberService.memberJoin(param);
-
 		return RESPONSE_OK;
 
 	}
 
 	// 아이디 중복 검사
 	@PostMapping("/{memberId}/memberIdChk")
-	public ResponseEntity<Void> memberIdChkPOST(@PathVariable String memberId) throws Exception{
+	public ResponseEntity<Void> memberIdChk(@PathVariable String memberId) throws Exception{
 
 		log.info("memberIdChk() 진입");
 
@@ -66,16 +59,32 @@ public class MemberController {
 			return RESPONSE_OK;	// 중복 아이디 x
 
 		}
+	}
 
-	} // memberIdChkPOST() 종료
+	@PostMapping("/{memberId}/update")
+	public ResponseEntity<Void> memberUpdate(@Valid @ModelAttribute MemberUpdateParam param, BindingResult bindingResult){
 
-	//로그인 페이지 이동
-	@GetMapping("/login")
-	public void joinGET() {
+		if(bindingResult.hasErrors()){
+			return RESPONSE_CONFLICT;
+		}
 
-		log.info("로그인 페이지 진입");
+		memberService.memberUpdate(param);
+		return RESPONSE_OK;
 
 	}
+
+	@GetMapping("/memberDelete")
+	public ResponseEntity<Void> memberDelete(@Valid Member member){
+
+		if(member !=null) {
+			memberService.memberDelete(member);
+			return RESPONSE_OK;
+		}
+
+		return  RESPONSE_BAD_REQUEST;
+	}
+
+
 
 	/* 로그인 */
 	@PostMapping("/login")
@@ -102,13 +111,9 @@ public class MemberController {
 
 	}
 
-
-
-
-
     // session을 제거해서 로그아웃
-   	@PostMapping("/logout")
-    public ResponseEntity<Void> logoutMainGET(HttpServletRequest request){
+   	@GetMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest request){
 
         HttpSession session = request.getSession();
 

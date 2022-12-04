@@ -20,7 +20,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 
 		if(session == null || session.getAttribute(SessionConst.LOGIN_MEMBER)==null){
-			//redirect를 requestURI로 하면 다시 interceptor가 호출 되어 무한 반복 된다.
 			response.sendRedirect("login?requestURL=" + requestURI);
 			return false;
 		}

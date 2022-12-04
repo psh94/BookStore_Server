@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.psh.mapper.BookMapper">
+  
+	<!-- 책 등록 -->
+  	<insert id="bookEnroll">
+  		insert into book(bookname, author, isbn, price, discount, quantity)
+  		values(#{bookName}, #{author}, #{isbn}, #{price}, #{discount}, #{quantity})
+  	</insert>
+
+	<!-- 책 등록 중복검사 -->
+	<select id="isExistBookIsbn" resultType="boolean">
+		select exists
+				   (select isbn from member where isbn = #{isbn})
+	</select>
+
+	<!-- 책 정보 조회	-->
+	<select id="bookGet" resultType="com.psh.model.book.BookInfo">
+		select bookName, author, isbn, price, discount from book where isbn = #{isbn}
+	</select>
+	<!-- 책 정보 업데이트	-->
+	<update id="bookUpdate">
+		update book set bookName = #{bookName}, author = #{author}, price=#{price}, quantity = #{quantity}, discount=#{discount} where isbn = #{isbn}
+	</update>
+
+	<!-- 책 등록 삭제	-->
+	<delete id="bookDelete">
+		delete from book where isbn = #{isbn}
+	</delete>
+  	
+  </mapper>

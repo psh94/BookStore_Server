@@ -4,9 +4,6 @@ import com.psh.model.member.Member;
 import com.psh.model.member.MemberJoinParam;
 import com.psh.model.member.MemberLoginParam;
 import com.psh.model.member.MemberUpdateParam;
-import com.psh.service.LoginService;
-import com.psh.service.MemberService;
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +36,7 @@ public class MemberServiceTests{
 
     // 회원가입 실패 (Bean Validation)
     @Test
-    public void joinTestWhenFailBecauseParamIsNotValid(){
+    public void joinTestWhenFail(){
         MemberJoinParam param = new MemberJoinParam();
         param.setMemberId("test7");
         param.setPassword("");
@@ -63,6 +60,7 @@ public class MemberServiceTests{
     @Test
     public void UpdateMemberTest(){
         MemberUpdateParam memberUpdateParam = new MemberUpdateParam();
+        //memberId가 test인 경우
         memberUpdateParam.setMemberId("test");
         memberUpdateParam.setPassword("abcd");
         memberUpdateParam.setEmail("abcd@test.com");

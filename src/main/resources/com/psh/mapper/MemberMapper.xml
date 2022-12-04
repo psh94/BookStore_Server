@@ -6,36 +6,35 @@
   
 	<!-- 회원가입 -->  
   	<insert id="memberJoin">
-  		insert into book_member
+  		insert into member
   		values(#{memberId}, #{password}, #{name}, #{email}, #{address}, 0, sysdate(), 100000, 5000)
   	</insert>
   	
   	<!-- 아이디 중복검사 -->
   	<select id="isExistMemberId" resultType="boolean">
 		select exists
-		    (select memberId from book_member where memberId = #{memberId})
+		    (select memberId from member where memberId = #{memberId})
   	</select>
 
   	<!-- 로그인 -->
   	<select id="memberLogin" resultType="com.psh.model.member.Member">
-  		select memberId, password, name, adminck, money, point from book_member where memberId = #{memberId} and password = #{password}
+  		select memberId, password, name, adminck, money, point from member where memberId = #{memberId} and password = #{password}
   	</select>
 
+	<!-- 회원 정보 업데이트 -->
 	<update id="memberUpdate" parameterType="com.psh.model.member.Member">
-		update book_member set password = #{password}, email = #{email}, address =#{address} where memberId = #{memberId}
+		update member set password = #{password}, email = #{email}, address =#{address} where memberId = #{memberId}
 	</update>
-
+	<!-- 회원 삭제 -->
 	<delete id="memberDelete" parameterType="com.psh.model.member.Member">
-		delete from book_member where memberId = #{memberId} and password = #{password}
+		delete from member where memberId = #{memberId} and password = #{password}
 	</delete>
-  	
-    	<!-- 주문자 정보 -->
-  	<select id="getMemberInfo" resultType="com.psh.model.member.Member">
-  	
-  		SELECT memberId, name, email, address, money, point
-  		FROM book_member 
-  		WHERE memberId = #{memberId}
-  	
-  	</select>  	
-  	
-  </mapper>
+
+	<!-- 로그인 -->
+	<select id="getMemberInfo" resultType="com.psh.model.member.Member">
+		select memberId, password, name, adminck, money, point from member where memberId = #{memberId}
+	</select>
+
+
+
+</mapper>

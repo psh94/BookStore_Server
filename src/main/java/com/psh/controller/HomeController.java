@@ -1,40 +1,44 @@
 package com.psh.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.psh.model.member.Member;
+import com.psh.utill.HttpResponses;
+import com.psh.utill.SessionConst;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-/**
- * Handles requests for the application home page.
- */
+import static com.psh.utill.HttpResponses.*;
+
 @Controller
+@Slf4j
 public class HomeController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+
 	@GetMapping("/")
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+	public ResponseEntity<Void> homeLogin(HttpServletRequest request, Model model) {
+
+		// session 존재 x
+		HttpSession session = request.getSession(false);
+		if(session == null){
+			return RESPONSE_OK;
+		}
+
+		Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+		// session 존재 o
+		// session에 loginMember가 없을 때,
+		if(loginMember == null){
+			return RESPONSE_OK;
+		}
+
+		// session 존재 o, loginMember도 있을 때,
+		model.addAttribute("member", loginMember);
+		return RESPONSE_OK;
+
 	}
+
 	
 }
