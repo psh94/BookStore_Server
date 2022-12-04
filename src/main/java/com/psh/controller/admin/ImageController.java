@@ -1,11 +1,13 @@
 package com.psh.controller.admin;
 
+import com.psh.mapper.ImageMapper;
 import com.psh.model.book.AttachImage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,8 @@ import java.util.UUID;
 @RequestMapping("/admin/book")
 @RequiredArgsConstructor
 public class ImageController {
+
+    private final ImageMapper imageMapper;
 
     /* 첨부 파일 업로드 */
     @PostMapping("/uploadImage")
@@ -148,6 +152,16 @@ public class ImageController {
         }
 
         return result;
+
+    }
+
+    /* 이미지 정보 반환 */
+    @GetMapping(value="/getAttachList")
+    public ResponseEntity<List<AttachImage>> getAttachList(int bookId){
+
+        log.info("getAttachList = {}" + bookId);
+
+        return new ResponseEntity<List<AttachImage>>(imageMapper.getAttachList(bookId), HttpStatus.OK);
 
     }
 

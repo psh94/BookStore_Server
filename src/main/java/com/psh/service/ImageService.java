@@ -1,10 +1,10 @@
-package com.psh.mapper;
+package com.psh.service;
 
 import com.psh.model.book.AttachImage;
 
 import java.util.List;
 
-public interface ImageMapper {
+public interface ImageService {
 
     /* 이미지 등록 */
     public void imageEnroll(AttachImage attachImage);

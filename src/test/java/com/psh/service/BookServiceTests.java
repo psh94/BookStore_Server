@@ -25,7 +25,7 @@ public class BookServiceTests {
     BookService bookService;
 
     @Autowired
-    ImageMapper imageMapper;
+    ImageService imageService;
 
     @Test
     public void bookEnrollTest(){
@@ -78,7 +78,7 @@ public class BookServiceTests {
         attachImage.setUploadPath("test");
         attachImage.setUuid("test2");
 
-        imageMapper.imageEnroll(attachImage);
+        imageService.imageEnroll(attachImage);
 
     }
 
@@ -116,6 +116,16 @@ public class BookServiceTests {
         // bookEnroll() 메서드 호출
         bookService.bookEnroll(book);
 
+    }
+
+    @Test
+    public void deleteImageAllTest() {
+
+        int bookId = 3;
+
+        imageService.deleteImageAll(bookId);
 
     }
+
+
 }

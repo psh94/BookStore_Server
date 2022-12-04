@@ -30,4 +30,6 @@ public class BookInfo {
     @NotNull
     private int discount;
 
+
+
 }

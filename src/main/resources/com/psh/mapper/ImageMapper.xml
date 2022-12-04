@@ -5,9 +5,19 @@
   <mapper namespace="com.psh.mapper.ImageMapper">
 
 	<insert id="imageEnroll">
-
 		insert into image(bookId, fileName, uploadPath, uuid) values (#{bookId}, #{fileName}, #{uploadPath}, #{uuid})
-
 	</insert>
+
+	<select id="getAttachList" resultType="com.psh.model.book.AttachImage">
+		select * from image where bookId = #{bookId}
+	</select>
+
+	<delete id="deleteImageAll">
+
+		delete FROM image where bookId = #{bookId}
+
+	</delete>
+
+
 
   </mapper>

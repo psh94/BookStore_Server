@@ -6,11 +6,14 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @ToString
 public class BookUpdateParam {
+
+    private int bookId;
 
     @NotNull
     private String isbn;
@@ -28,4 +31,7 @@ public class BookUpdateParam {
     private Date regDate;
 
     private Date updateDate;
+
+    private List<AttachImage> imageList;
+
 }
