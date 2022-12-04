@@ -2,12 +2,14 @@ package com.psh.service;
 
 import com.psh.exception.ExistSameBookException;
 import com.psh.mapper.BookMapper;
+import com.psh.mapper.ImageMapper;
 import com.psh.model.book.Book;
 import com.psh.model.book.BookInfo;
 import com.psh.model.book.BookUpdateParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,9 +18,24 @@ public class BookServiceImpl implements BookService{
 
     private final BookMapper bookMapper;
 
+    private final ImageMapper imageMapper;
+
+//    @Transactional
     @Override
     public void bookEnroll(Book book) {
         bookMapper.bookEnroll(book);
+
+        /* 이미지 등록 로직 */
+        if(book.getImageList() == null || book.getImageList().size() <= 0) {
+            return; // 여기서 종료
+        }
+
+        book.getImageList().forEach(attach ->{
+
+            attach.setBookId(book.getBookId());
+            imageMapper.imageEnroll(attach);
+
+        });
     }
 
     @Override

@@ -6,7 +6,17 @@
   
 	<!-- 책 등록 -->
   	<insert id="bookEnroll">
-  		insert into book(bookname, author, isbn, price, discount, quantity)
+
+		<!-- insert 문이 실행된 후에 selectKey 실행
+		쿼리문의 결과값이 Book의 bookId에 int 타입으로 반환된다.
+		 마지막으로 insert 된 id를 반환.-->
+		<selectKey resultType="int" keyProperty="bookId" order="AFTER">
+
+			SELECT LAST_INSERT_ID()
+
+		</selectKey>
+
+		insert into book(bookname, author, isbn, price, discount, quantity)
   		values(#{bookName}, #{author}, #{isbn}, #{price}, #{discount}, #{quantity})
   	</insert>
 
