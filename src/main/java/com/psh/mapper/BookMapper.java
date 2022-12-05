@@ -28,4 +28,6 @@ public interface BookMapper {
 	public void bookDelete(Book book);
 
 	public Member getMemberInfo(String memberId);
+
+
 }

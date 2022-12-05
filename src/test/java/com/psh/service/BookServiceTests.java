@@ -127,5 +127,17 @@ public class BookServiceTests {
 
     }
 
+    /* 지정 상품 이미지 정보 얻기 */
+    @Test
+    public void getAttachInfoTest() {
+
+        int bookId = 3;
+
+        List<AttachImage> list = imageService.getAttachInfo(bookId);
+
+        System.out.println("list : " + list);
+
+    }
+
 
 }

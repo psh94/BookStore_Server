@@ -14,4 +14,7 @@ public interface ImageService {
 
     /* 지정 상품 이미지 전체 삭제 */
     public void deleteImageAll(int bookId);
+
+    /* 지정 상품 이미지 정보 얻기 */
+    public List<AttachImage> getAttachInfo(int bookId);
 }
