@@ -1,9 +1,11 @@
 package com.psh.mapper;
 
 import com.psh.model.book.AttachImage;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface ImageMapper {
 
     /* 이미지 등록 */

@@ -45,9 +45,12 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public BookInfo bookGet(String isbn) {
+    public BookInfo bookGet(int bookId) {
 
-            return bookMapper.bookGet(isbn);
+            BookInfo bookInfo = bookMapper.bookGet(bookId);
+            bookInfo.setImageList(imageMapper.getAttachInfo(bookId));
+
+            return bookInfo;
     }
 
     @Transactional

@@ -13,7 +13,7 @@ public interface BookService {
     public boolean isExistBookIsbn(String isbn);
 
     /* 상품 조회 */
-    public BookInfo bookGet(String isbn);
+    public BookInfo bookGet(int bookId);
 
     /* 책 업데이트 */
     public void bookUpdate(BookUpdateParam bookUpdateParam);

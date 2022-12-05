@@ -1,18 +1,15 @@
 package com.psh.controller.admin;
 
 import com.psh.exception.ExistSameBookException;
-import com.psh.model.book.AttachImage;
-import com.psh.model.book.Book;
-import com.psh.model.book.BookInfo;
-import com.psh.model.book.BookUpdateParam;
+import com.psh.model.book.*;
 import com.psh.service.BookService;
 import com.psh.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.imageio.ImageIO;
 import javax.validation.Valid;
 
 import java.nio.file.Path;
@@ -43,9 +40,10 @@ public class BookController {
         return RESPONSE_OK;
     }
 
-    @GetMapping("/{isbn}")
-    public BookInfo bookDetail(@PathVariable String isbn){
-       return bookService.bookGet(isbn);
+    @GetMapping("/Detail/{bookId}")
+    public BookInfo bookDetail(@PathVariable int bookId, Model model){
+        model.addAttribute("booksInfo", bookService.bookGet(bookId));
+       return bookService.bookGet(bookId);
     }
 
     @PutMapping("/update")
@@ -96,6 +94,7 @@ public class BookController {
         }
         return RESPONSE_CONFLICT;
     }
+
 
 
 }

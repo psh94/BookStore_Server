@@ -42,7 +42,7 @@ public class BookServiceTests {
 
     @Test
     public void bookGetTest(){
-        bookService.bookGet("9788982814471");
+        bookService.bookGet(3);
     }
 
     @Test
@@ -138,6 +138,7 @@ public class BookServiceTests {
         System.out.println("list : " + list);
 
     }
+
 
 
 }

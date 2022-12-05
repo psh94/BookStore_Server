@@ -4,10 +4,9 @@ import com.psh.model.book.Book;
 import com.psh.model.book.BookInfo;
 import com.psh.model.book.BookUpdateParam;
 import com.psh.model.member.Member;
-import com.psh.model.member.MemberJoinParam;
-import com.psh.model.member.MemberLoginParam;
-import com.psh.model.member.MemberUpdateParam;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface BookMapper {
@@ -19,7 +18,7 @@ public interface BookMapper {
 	public boolean isExistBookIsbn(String isbn);
 
 	/* 책 조회 */
-	public BookInfo bookGet(String isbn);
+	public BookInfo bookGet(int bookId);
 
 	/* 책 업데이트 */
 	public void bookUpdate(BookUpdateParam bookUpdateParam);
@@ -28,6 +27,7 @@ public interface BookMapper {
 	public void bookDelete(Book book);
 
 	public Member getMemberInfo(String memberId);
+
 
 
 }

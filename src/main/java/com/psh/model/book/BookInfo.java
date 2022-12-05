@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ import java.util.Date;
 public class BookInfo {
 
     @NotNull
-    private Long bookId;
+    private int bookId;
 
     @NotNull
     private String bookName;
@@ -29,6 +30,9 @@ public class BookInfo {
 
     @NotNull
     private int discount;
+
+    private List<AttachImage> imageList;
+
 
 
 

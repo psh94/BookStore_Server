@@ -28,7 +28,7 @@
 
 	<!-- 책 정보 조회	-->
 	<select id="bookGet" resultType="com.psh.model.book.BookInfo">
-		select bookName, author, isbn, price, discount from book where isbn = #{isbn}
+		select bookName, author, isbn, price, discount from book where bookId = #{bookId}
 	</select>
 	<!-- 책 정보 업데이트	-->
 	<update id="bookUpdate">
