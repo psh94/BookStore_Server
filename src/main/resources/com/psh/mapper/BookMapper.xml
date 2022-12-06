@@ -39,5 +39,13 @@
 	<delete id="bookDelete">
 		delete from book where isbn = #{isbn}
 	</delete>
+
+	<select id="getBookNameById" resultType="com.psh.model.book.Book">
+
+		select bookId, bookName from book
+		where bookId = #{bookId}
+
+
+	</select>
   	
   </mapper>

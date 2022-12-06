@@ -26,7 +26,10 @@ public interface BookMapper {
 	/* 책 삭제 */
 	public void bookDelete(Book book);
 
-	public Member getMemberInfo(String memberId);
+	public Book getBooksInfo(int bookId);
+
+	/* 상품 id 이름 */
+	public Book getBookNameById(int bookId);
 
 
 

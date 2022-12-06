@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class BookServiceImpl implements BookService{
 
     private final BookMapper bookMapper;
@@ -74,5 +73,10 @@ public class BookServiceImpl implements BookService{
     @Override
     public void bookDelete(Book book) {
         bookMapper.bookDelete(book);
+    }
+
+    @Override
+    public Book getBookNameById(int bookId) {
+        return bookMapper.getBookNameById(bookId);
     }
 }

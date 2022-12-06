@@ -21,4 +21,7 @@ public interface BookService {
     /* 책 삭제 */
     public void bookDelete(Book book);
 
+    /* 상품 id 이름 */
+    public Book getBookNameById(int bookId);
+
 }
